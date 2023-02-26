@@ -1,23 +1,6 @@
-const dotenv = require("dotenv");
-dotenv.config();
-const { Configuration, OpenAIApi } = require("openai");
-const { Client, Events, GatewayIntentBits } = require("discord.js");
+const { openai, discord } = require("./config.js");
 
-const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
-
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.GuildMessageReactions,
-    GatewayIntentBits.GuildMessageTyping,
-    GatewayIntentBits.MessageContent,
-  ],
-});
-client.on("messageCreate", async (message) => {
+discord.on("messageCreate", async (message) => {
   if (message.author.bot) return;
 
   try {
@@ -38,8 +21,8 @@ client.on("messageCreate", async (message) => {
   }
 });
 
-client.once(Events.ClientReady, (c) => {
+discord.on("ready", (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.login(process.env.DISCORD_TOKEN);
+discord.login(process.env.DISCORD_TOKEN);
