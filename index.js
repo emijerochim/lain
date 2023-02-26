@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const { openai, discord } = require("./config.js");
 
 discord.on("messageCreate", async (message) => {
