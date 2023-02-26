@@ -2,7 +2,6 @@ const dotenv = require("dotenv");
 dotenv.config();
 const { Configuration, OpenAIApi } = require("openai");
 const { Client, Events, GatewayIntentBits } = require("discord.js");
-const { token } = require("./config.json");
 
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -46,4 +45,4 @@ client.once(Events.ClientReady, (c) => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.login(token);
+client.login(process.env.DISCORD_TOKEN);
