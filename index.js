@@ -19,7 +19,7 @@ client.on("messageCreate", async (message) => {
 
   try {
     if (message.content.startsWith("!ask ")) {
-      const response = await openai.createCompletion(...settings, {
+      const response = await openai.createCompletion(...[settings], {
         prompt: message.content.slice(5),
       });
 
